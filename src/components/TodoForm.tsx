@@ -1,11 +1,16 @@
 import { FC, FormEvent, useRef } from "react";
 
-const TodoForm:FC = () => {
-  const inputRef = useRef(null)
+interface TodoFormProps {
+  handleAddTodoItem:(inputValue: string)=> void;
+}
+
+const TodoForm:FC<TodoFormProps> = ({handleAddTodoItem}) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
   const handleSubmit = (event:FormEvent) => {
     event?.preventDefault()
     const inputValue = inputRef.current!.value
-    console.log(inputValue);
+    handleAddTodoItem(inputValue)
     
   }
   return (
