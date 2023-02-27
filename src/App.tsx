@@ -9,7 +9,10 @@ const App:FC = () => {
 
   const handleAddTodoItem = (inputValue: string) => {
     setTodos(prevTodos => [...prevTodos, {id: Math.random().toString(), description: inputValue}] )
-  
+  }
+
+  const handleDeleteTodoItem = (todoId: string) => {
+    setTodos(prevTodos => prevTodos.filter(todoItem => todoItem.id !== todoId))
   }
   return (
     <div className="App">
@@ -17,7 +20,7 @@ const App:FC = () => {
         <div className='test-center text-4xl font-bold'>TODO LIST</div>
       </header>
       <TodoForm handleAddTodoItem={handleAddTodoItem}/>
-      <TodoList data={todos}/>
+      <TodoList data={todos} handleDeleteTodoItem={handleDeleteTodoItem}/>
     </div>
   )
 }
