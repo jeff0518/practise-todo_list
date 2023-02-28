@@ -21,6 +21,7 @@ const App:FC = () => {
       </header>
       <TodoForm handleAddTodoItem={handleAddTodoItem}/>
       <TodoList data={todos} handleDeleteTodoItem={handleDeleteTodoItem}/>
+      <p className='mt-4'>目前有<span className='font-medium'>{todos.length}</span>個事項待完成</p>
     </div>
   )
 }
