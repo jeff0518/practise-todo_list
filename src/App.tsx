@@ -6,6 +6,7 @@ import Todo from './models/Todo.model'
 
 const App:FC = () => {
   const [todos, setTodos] = useState<Todo[]>([])
+  const [error, setError] = useState<Error>();
 
   const handleAddTodoItem = (inputValue: string) => {
     setTodos(prevTodos => [...prevTodos, {id: Math.random().toString(), description: inputValue}] )
