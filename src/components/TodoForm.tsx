@@ -9,9 +9,15 @@ const TodoForm: FC<TodoFormProps> = ({ handleAddTodoItem }) => {
 
   const handleSubmit = (event: FormEvent) => {
     event?.preventDefault();
+
     const inputValue = inputRef.current!.value;
+    if (inputValue.trim() === "") {
+      return
+    }
     handleAddTodoItem(inputValue);
-    
+    if (inputRef.current !== null) {
+      inputRef.current.value = "";
+    }
   };
   return (
     <form
