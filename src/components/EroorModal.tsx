@@ -8,7 +8,7 @@ const ErrorModal = (props) => {
       className="fixed top-0 left-0 w-full h-screen z-10 bg-black/50"
       onClick={props.onConfirm}
     >
-      <Card classStyle="fixed top-[30vh] left-[10%] w-4/5 z-100 overflow-hidden bg-white shadow-[0 2px 8px rgba(0, 0, 0, 0.26)] rounded-xl">
+      <Card classStyle="fixed top-[30vh] left-[10%] w-4/5 z-100 overflow-hidden">
         <header className="bg-indigo-600 p-4">
           <h2>{props.title}</h2>
         </header>
