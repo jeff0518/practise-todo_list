@@ -22,9 +22,6 @@ const Home:FC = (props) => {
   return (
     <div className="relative top-12">
       <Card className="w-11/12 max-w-2xl p-12 mx-auto my-8 text-center">
-        {/* <header className="w-full h-24 bg-blue-400 flex justify-center items-center">
-          <div className="test-center text-4xl font-bold">TODO LIST</div>
-        </header> */}
         <TodoForm handleAddTodoItem={handleAddTodoItem} />
         <TodoList data={todos} handleDeleteTodoItem={handleDeleteTodoItem} />
         <p className="mt-4">

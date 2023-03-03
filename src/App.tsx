@@ -1,47 +1,38 @@
-import { FC, useState } from 'react'
-import './App.css'
-import Login from './components/Login'
-import Home from './components/Home'
-import MainHeader from './components/MainHeader/MainHeader'
-// import TodoForm from './components/TodoForm'
-// import TodoList from './components/TodoList'
-// import Todo from './models/Todo.model'
+import { FC, useEffect, useState } from "react";
+import "./App.css";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import MainHeader from "./components/MainHeader/MainHeader";
 
-const App:FC = () => {
+const App: FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const loginHandler = (email, password) => {
+  useEffect(() => {
+    const userLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (userLoggedIn === "1") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = (email, password) => {
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
 
-  const logoutHandler = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
   };
-  // const [todos, setTodos] = useState<Todo[]>([])
-  // const [error, setError] = useState<Error>();
-
-  // const handleAddTodoItem = (inputValue: string) => {
-  //   setTodos(prevTodos => [...prevTodos, {id: Math.random().toString(), description: inputValue}] )
-  // }
-
-  // const handleDeleteTodoItem = (todoId: string) => {
-  //   setTodos(prevTodos => prevTodos.filter(todoItem => todoItem.id !== todoId))
-  // }
   return (
     <div className="App">
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={handleLogout} />
       <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
+        {!isLoggedIn && <Login onLogin={handleLogin} />}
+        {isLoggedIn && <Home onLogout={handleLogout} />}
       </main>
-      {/* <header className='w-full h-24 bg-blue-400 flex justify-center items-center'>
-        <div className='test-center text-4xl font-bold'>TODO LIST</div>
-      </header>
-      <TodoForm handleAddTodoItem={handleAddTodoItem}/>
-      <TodoList data={todos} handleDeleteTodoItem={handleDeleteTodoItem}/>
-      <p className='mt-4'>目前有<span className='font-medium'>{todos.length}</span>個事項待完成</p> */}
     </div>
   );
-}
+};
 
-export default App
+export default App;

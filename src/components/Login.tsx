@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./UI/Card";
 import Button from "./UI/Button";
 
@@ -9,18 +9,23 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
 
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log('正在執行');
+      setFormIsValid(email.includes("@") && password.trim().length > 6);
+    }, 1000);
+    return () => {
+      console.log('清除中');
+      clearTimeout(identifier)
+    }
+  }, [email, password]);
+
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
-    setFormIsValid(
-      event.target.value.includes("@") && password.trim().length > 6
-    );
   };
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
-    setFormIsValid(
-      event.target.value.trim().length > 6 && email.includes("@")
-    );
   };
 
   const handleValidateEmail = () => {
